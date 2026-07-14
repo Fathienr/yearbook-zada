@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ZADA Yearbook — Portofolio Buku Tahunan Sekolah</title>
+<meta name="description" content="Arsip digital seluruh proyek buku tahunan sekolah yang diproduksi ZADA — jelajahi koleksi berdasarkan sekolah, jenjang, dan tahun." />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+</head>
+<body>
+<div class="app-shell">
+
+<nav class="site-nav">
+  <div class="container">
+    <a href="index.html" class="brand">ZADA <small>Yearbook</small></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Beranda</a></li>
+      <li><a href="index.html#portofolio">Portofolio</a></li>
+      <li><a href="index.html#tentang">Tentang</a></li>
+      <li><a href="admin-login.html" class="nav-cta">Admin</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Buka menu">&#9776;</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-copy">
+      <span class="eyebrow">Arsip Digital Buku Tahunan</span>
+      <h1>Setiap angkatan punya <em>satu</em> cerita untuk disampul.</h1>
+      <p>ZADA Yearbook menghimpun seluruh proyek buku tahunan sekolah yang telah kami produksi — tersusun rapi per sekolah, jenjang, dan tahun — supaya calon klien bisa melihat langsung kualitas desain dan fotografi kami sebelum mulai proyek berikutnya.</p>
+      <div class="hero-actions">
+        <a href="#portofolio" class="btn btn-primary">Jelajahi Portofolio</a>
+        <a href="#tentang" class="btn btn-ghost">Tentang ZADA</a>
+      </div>
+      <div class="hero-stats" id="hero-stats">
+        <div><strong id="stat-total">—</strong><span>KOLEKSI TERDOKUMENTASI</span></div>
+        <div><strong id="stat-schools">—</strong><span>SEKOLAH MITRA</span></div>
+        <div><strong id="stat-years">—</strong><span>TAHUN PRODUKSI</span></div>
+      </div>
+    </div>
+    <div class="shelf" id="hero-shelf" aria-hidden="true"></div>
+  </div>
+</header>
+
+<section id="portofolio">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Koleksi</span>
+        <h2>Jelajahi portofolio buku tahunan</h2>
+        <p>Cari berdasarkan nama sekolah, atau saring menurut jenjang, tahun produksi, dan kategori layanan.</p>
+      </div>
+    </div>
+
+    <form class="toolbar" id="filter-form">
+      <div class="field">
+        <label for="q">Cari sekolah</label>
+        <input type="search" id="q" placeholder="mis. SMA Tunas Bangsa" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="f-level">Jenjang</label>
+        <select id="f-level">
+          <option value="">Semua</option>
+          <option value="SD">SD</option>
+          <option value="SMP">SMP</option>
+          <option value="SMA">SMA</option>
+          <option value="SMK">SMK</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-year">Tahun</label>
+        <select id="f-year">
+          <option value="">Semua</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-category">Kategori</label>
+        <select id="f-category">
+          <option value="">Semua</option>
+          <option value="Reguler">Reguler</option>
+          <option value="Premium">Premium</option>
+        </select>
+      </div>
+      <button type="button" class="btn-reset" id="btn-reset">Reset filter</button>
+    </form>
+
+    <p class="result-count" id="result-count"></p>
+
+    <div class="grid" id="portfolio-grid"></div>
+    <div class="empty-state" id="empty-state" style="display:none;">
+      Tidak ada koleksi yang cocok dengan pencarian atau filter ini.
+    </div>
+  </div>
+</section>
+
+<section class="band" id="tentang">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Bagaimana kami bekerja</span>
+        <h2>Dari konsep sampul hingga arsip digital resmi</h2>
+        <p>ZADA Yearbook bukan sekadar katalog PDF — setiap proyek disusun sebagai koleksi digital yang terorganisir dan tersambung langsung ke flipbook interaktif.</p>
+      </div>
+    </div>
+    <ul class="process">
+      <li>
+        <h3>1. Konsep &amp; Konsultasi</h3>
+        <p>Menentukan tema sampul, gaya fotografi, dan struktur halaman bersama pihak sekolah.</p>
+      </li>
+      <li>
+        <h3>2. Produksi</h3>
+        <p>Fotografi studio dan kandid, desain tata letak, serta kurasi seluruh dokumentasi angkatan.</p>
+      </li>
+      <li>
+        <h3>3. Revisi</h3>
+        <p>Draf tata letak dikirim ke sekolah untuk dicek dan direvisi sebelum difinalisasi.</p>
+      </li>
+      <li>
+        <h3>4. Publikasi Flipbook</h3>
+        <p>Buku final diterbitkan melalui AnyFlip agar dapat dibaca interaktif tanpa perlu diunduh.</p>
+      </li>
+      <li>
+        <h3>5. Publikasi Cetakan</h3>
+        <p>Opsional — dicetak fisik jika sekolah memilih paket cetak; jika tidak, tahap ini dilewati.</p>
+      </li>
+      <li>
+        <h3>6. Pengarsipan</h3>
+        <p>Cover dan tautan disimpan permanen di platform ini sebagai arsip digital resmi ZADA.</p>
+      </li>
+    </ul>
+    <p class="process-footnote">Ingin tahu buku sekolah Anda sudah sampai tahap mana? Buka halaman sekolah Anda di portofolio lalu klik <strong>“Cek Perkembangan Buku”</strong> dan masukkan kata sandi yang diberikan tim ZADA.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>ZADA Yearbook</h4>
+        <p style="max-width:38ch;font-size:0.88rem;">Platform portofolio digital untuk seluruh proyek buku tahunan sekolah yang diproduksi oleh ZADA.</p>
+      </div>
+      <div>
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="index.html#portofolio">Portofolio</a></li>
+          <li><a href="index.html#tentang">Tentang</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Untuk Tim ZADA</h4>
+        <ul>
+          <li><a href="admin-login.html">Masuk Admin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 ZADA. Seluruh hak cipta dilindungi.</span>
+      <span>yearbook.zada.id</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script defer src="js/firebase-init.js"></script>
+<script defer src="js/data.js"></script>
+<script defer src="js/ui.js"></script>
+<script defer src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Masuk Admin — ZADA Yearbook</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+</head>
+<body>
+
+<div class="auth-shell">
+  <div class="auth-card">
+    <a href="index.html" class="brand">ZADA <small>Yearbook</small></a>
+    <h1>Dashboard Admin</h1>
+    <p>Kelola portofolio buku tahunan sekolah.</p>
+
+    <p class="auth-error" id="auth-error">Email atau password salah.</p>
+
+    <form id="login-form">
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" autocomplete="username" required />
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" autocomplete="current-password" required />
+      </div>
+      <button type="submit" class="btn btn-primary" id="btn-submit">Masuk</button>
+    </form>
+
+    <p class="auth-hint">
+      Login diverifikasi lewat Firebase Authentication di sisi server —
+      akun admin dibuat lewat Firebase Console, bukan tertulis di kode ini.
+    </p>
+  </div>
+</div>
+
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script defer src="js/firebase-init.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // If already signed in, skip straight to the dashboard.
+  auth.onAuthStateChanged((user) => {
+    if (user) window.location.href = "admin-dashboard.html";
+  });
+
+  const form = document.getElementById("login-form");
+  const errorEl = document.getElementById("auth-error");
+  const btn = document.getElementById("btn-submit");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorEl.style.display = "none";
+    btn.disabled = true;
+    btn.textContent = "Memeriksa...";
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      window.location.href = "admin-dashboard.html";
+    } catch (err) {
+      errorEl.textContent = "Email atau password salah.";
+      errorEl.style.display = "block";
+      btn.disabled = false;
+      btn.textContent = "Masuk";
+    }
+  });
+});
+</script>
+</body>
+</html>

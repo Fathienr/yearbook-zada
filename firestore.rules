@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Public catalog metadata (name, level, cover, hasPassword flag, and
+    // editions ONLY for non-protected schools). Anyone can browse the
+    // portfolio list and open non-protected schools. Only a signed-in
+    // admin can create/edit/delete.
+    match /schools/{schoolId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Protected schools' actual editions + progress (perkembangan buku).
+    // Document IDs are "{schoolId}__{sha256(password)}". A visitor can only
+    // successfully fetch this document if they already computed the same
+    // hash, i.e. already knew the correct password. Listing the collection
+    // is not allowed, so it cannot be browsed or enumerated.
+    match /protected/{docId} {
+      allow get: if true;
+      allow list: if false;
+      allow write: if request.auth != null;
+    }
+
+    // Admin-only bookkeeping (which hash is currently valid per school).
+    // Never exposed to the public.
+    match /admin_meta/{schoolId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
