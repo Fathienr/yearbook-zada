@@ -151,6 +151,56 @@ function setCoverPreview(dataUrl, initial) {
     : (initial || "?");
 }
 
+// Resize + compress an image file to a JPEG data URL so it stays well under
+// Firestore's ~1MB per-document limit (raw phone photos are often 3-8MB).
+function compressImageToDataURL(file, { maxWidth = 1280, maxHeight = 1280, quality = 0.72 } = {}) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("Gagal membaca file gambar."));
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = () => reject(new Error("Gagal memuat gambar."));
+      img.onload = () => {
+        let { width, height } = img;
+        const scale = Math.min(1, maxWidth / width, maxHeight / height);
+        width = Math.round(width * scale);
+        height = Math.round(height * scale);
+
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+coverInput.addEventListener("change", async () => {
+  const file = coverInput.files && coverInput.files[0];
+  if (!file) return;
+  if (!/^image\/(jpe?g|png)$/i.test(file.type)) {
+    showToast("File harus berformat JPG, JPEG, atau PNG.");
+    coverInput.value = "";
+    return;
+  }
+  try {
+    const compressed = await compressImageToDataURL(file);
+    setCoverPreview(compressed);
+    // Safety net: if a very busy photo still comes out large, compress harder.
+    if (compressed.length > 700 * 1024) {
+      const smaller = await compressImageToDataURL(file, { maxWidth: 900, maxHeight: 900, quality: 0.6 });
+      setCoverPreview(smaller);
+    }
+  } catch (err) {
+    console.error("Gagal memproses gambar:", err);
+    showToast("Gagal memproses gambar sampul. Coba foto lain.");
+    coverInput.value = "";
+  }
+});
 coverInput.addEventListener("change", () => {
   const file = coverInput.files && coverInput.files[0];
   if (!file) return;
@@ -216,7 +266,10 @@ schoolForm.addEventListener("submit", async (e) => {
     cover: coverHidden.value,
   };
   if (password) patch.password = password; // only sent if admin actually typed one
-
+if (patch.cover && patch.cover.length > 900 * 1024) {
+  showToast("Foto sampul masih terlalu besar. Coba unggah ulang foto lain.");
+  return;
+}
   schoolSubmitBtn.disabled = true;
   schoolSubmitBtn.textContent = "Menyimpan...";
 
