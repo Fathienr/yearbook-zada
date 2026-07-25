@@ -46,15 +46,12 @@
   --glass: rgba(255, 255, 255, 0.055);
   --glass-strong: rgba(255, 255, 255, 0.1);
   --glass-stronger: rgba(255, 255, 255, 0.16);
-  --glass-border: rgba(255, 255, 255, 0.16);
-  --glass-border-strong: rgba(255, 255, 255, 0.3);
   --glass-blur: 26px;
-
   --display: "Fraunces", serif;
   --body: "Inter", sans-serif;
   --mono: "IBM Plex Mono", monospace;
 
-  --radius: 12px;
+  --radius: 9px;
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -143,7 +140,7 @@ textarea {
 }
 
 .container {
-  width: min(1180px, 100% - 3rem);
+  width: min(1580px, 100% - 3rem);
   margin-inline: auto;
 }
 
@@ -157,19 +154,25 @@ textarea {
 
 /* ---------------- App shell (the "glass window") ---------------- */
 
-.app-shell {
+.app-shell-wrap {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 1480px;
-  border-radius: var(--radius-shell);
+  max-width: none;
+  animation: pageFadeIn 1s ease-in both;
+}
+
+.app-shell {
+  position: relative;
+  width: 100%;
+  border-radius: 0 0 var(--radius-shell) var(--radius-shell);
   overflow: hidden;
   background: var(--glass);
   backdrop-filter: blur(var(--glass-blur)) saturate(150%);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
   border: 1px solid var(--glass-border);
+  border-top: none;
   box-shadow: var(--shadow-shell);
-  animation: pageFadeIn 1s ease-in both;
 }
 
 /* ---------------- Page transition (ease-in fade + rise on every page) ---------------- */
@@ -191,11 +194,12 @@ textarea {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(10, 14, 43, 0.35);
+  border-radius: var(--radius-shell) var(--radius-shell) 0 0;
+  background: rgba(10, 14, 43, 0.55);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   color: var(--text-light);
-  border-bottom: 1px solid var(--glass-border);
+  border: 1px solid var(--glass-border);
 }
 
 .site-nav .container {
@@ -227,11 +231,11 @@ textarea {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 4rem;
   list-style: none;
   margin: 0;
-  padding: 0;
-  font-size: 0.88rem;
+  padding: 1rem;
+  font-size: 1rem;
 }
 
 .nav-links a {
@@ -424,8 +428,9 @@ textarea {
   justify-content: center;
   padding-bottom: 0.8rem;
   transform-origin: bottom;
-  transition: transform 0.35s ease, filter 0.35s ease;
-  filter: saturate(1.05);
+  transition: transform 0.35s ease, filter 0.1s ease;
+  filter: saturate(1.5);
+  
 }
 
 .shelf:hover .spine {
@@ -787,7 +792,7 @@ section {
 
 .site-footer {
   color: var(--text-muted);
-  padding: 3rem 0 2rem;
+  padding: 3rem 0 3rem;
   border-top: 1px solid var(--glass-border);
 }
 
@@ -802,7 +807,7 @@ section {
 .footer-grid h4 {
   color: var(--text-light);
   font-family: var(--display);
-  font-size: 1rem;
+  font-size:2rem;
   margin: 0 0 0.9rem;
 }
 
@@ -1440,10 +1445,15 @@ section {
 }
 
 .admin-top {
-  background: rgba(10, 14, 43, 0.35);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-radius: var(--radius-shell) var(--radius-shell) 0 0;
+  background: rgba(10, 14, 43, 0.55);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   color: var(--text-light);
-  border-bottom: 1px solid var(--glass-border);
+  border: 1px solid var(--glass-border);
 }
 
 .admin-top .container {
@@ -1906,6 +1916,12 @@ tbody tr:hover {
     padding: 0;
   }
   .app-shell {
+  .site-nav,
+  .admin-top {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
     border-radius: 0;
     border-left: none;
     border-right: none;

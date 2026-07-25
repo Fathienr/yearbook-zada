@@ -13,15 +13,15 @@
 <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
 </head>
-<body>
-<div class="app-shell">
+<body></body>
+<div class="app-shell-wrap">
 
 <nav class="site-nav">
   <div class="container">
     <a href="index.html" class="brand">ZADA <small>Yearbook</small></a>
     <ul class="nav-links">
       <li><a href="index.html" class="active">Beranda</a></li>
-      <li><a href="index.html#portofolio">Portofolio</a></li>
+      <li><a href="index.html#katalog">Katalog</a></li>
       <li><a href="index.html#tentang">Tentang</a></li>
       <li><a href="admin-login.html" class="nav-cta">Admin</a></li>
     </ul>
@@ -29,6 +29,7 @@
   </div>
 </nav>
 
+<div class="app-shell">
 <header class="hero">
   <div class="container">
     <div class="hero-copy">
@@ -36,7 +37,7 @@
       <h1>Setiap angkatan punya <em>satu</em> cerita untuk disampul.</h1>
       <p>ZADA Yearbook menghimpun seluruh proyek buku tahunan sekolah yang telah kami produksi — tersusun rapi per sekolah, jenjang, dan tahun — supaya calon klien bisa melihat langsung kualitas desain dan fotografi kami sebelum mulai proyek berikutnya.</p>
       <div class="hero-actions">
-        <a href="#portofolio" class="btn btn-primary">Jelajahi Portofolio</a>
+        <a href="#katalog" class="btn btn-primary">Jelajahi Katalog</a>
         <a href="#tentang" class="btn btn-ghost">Tentang ZADA</a>
       </div>
       <div class="hero-stats" id="hero-stats">
@@ -49,12 +50,12 @@
   </div>
 </header>
 
-<section id="portofolio">
+<section id="katalog">
   <div class="container">
     <div class="section-head">
       <div>
         <span class="eyebrow">Koleksi</span>
-        <h2>Jelajahi portofolio buku tahunan</h2>
+        <h2>Jelajahi Katalog buku tahunan</h2>
         <p>Cari berdasarkan nama sekolah, atau saring menurut jenjang, tahun produksi, dan kategori layanan.</p>
       </div>
     </div>
@@ -149,20 +150,18 @@
     <div class="footer-grid">
       <div>
         <h4>ZADA Yearbook</h4>
-        <p style="max-width:38ch;font-size:0.88rem;">Platform portofolio digital untuk seluruh proyek buku tahunan sekolah yang diproduksi oleh ZADA.</p>
+        <p style="max-width:38ch;font-size:1rem;">Platform portofolio digital untuk seluruh proyek buku tahunan sekolah yang diproduksi oleh ZADA.</p>
       </div>
       <div>
-        <h4>Navigasi</h4>
-        <ul>
-          <li><a href="index.html">Beranda</a></li>
-          <li><a href="index.html#portofolio">Portofolio</a></li>
-          <li><a href="index.html#tentang">Tentang</a></li>
-        </ul>
+        <h4>Alamat</h4>
+        <p style="max-width:38ch;font-size:0.88rem;"> Jl. Ceger Raya No.3, RW.4, Jurang Manggu Tim., Kec. Pd. Aren, Kota Tangerang Selatan, Banten 15222
       </div>
       <div>
-        <h4>Untuk Tim ZADA</h4>
+        <h4>Contact Person</h4>
         <ul>
-          <li><a href="admin-login.html">Masuk Admin</a></li>
+          <li><a href="https://www.instagram.com/zada.yearbook" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="mailto:zadafotostudio@gmail.com" target="_blank" rel="noopener noreferrer">Email</a></li>
+          <li><a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
         </ul>
       </div>
     </div>
@@ -172,6 +171,10 @@
     </div>
   </div>
 </footer>
+</div><!-- /.app-shell -->
+</div><!-- /.app-shell-wrap -->
+
+<script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 
 </div>
 
@@ -182,5 +185,6 @@
 <script defer src="js/data.js"></script>
 <script defer src="js/ui.js"></script>
 <script defer src="js/main.js"></script>
+<script defer src="js/scroll.js"></script>
 </body>
 </html>
