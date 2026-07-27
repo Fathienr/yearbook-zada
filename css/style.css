@@ -1034,6 +1034,9 @@ section {
   color: var(--text-muted);
   max-width: 70ch;
   margin: 0 0 1.1rem;
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
 }
 
 /* ---------------- Privacy lock gate ---------------- */
