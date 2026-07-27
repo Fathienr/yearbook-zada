@@ -4,13 +4,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const root = document.getElementById("page-content");
   root.innerHTML = `<section style="padding:6rem 0;text-align:center;"><p style="color:var(--text-faint);font-family:var(--mono);font-size:0.85rem;">Memuat data sekolah&hellip;</p></section>`;
   const school = id ? await ZadaData.getSchoolById(id) : null;
-  if (!school) {
-  document.title = "Sekolah Tidak Ditemukan — ZADA Yearbook";
-  root.innerHTML = `
-    ...(isi yang sudah ada, tidak berubah)
-  `;
 
   if (!school) {
+    document.title = "Sekolah Tidak Ditemukan — ZADA Yearbook";
     root.innerHTML = `
       <section style="padding:6rem 0;text-align:center;">
         <div class="container">
@@ -21,13 +17,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       </section>
     `;
-    const unlockKey = `zada_unlocked_${school.id}`;
-document.title = `${school.school} — ZADA Yearbook`;   // ← baris baru ini
-const isProtected = Boolean(school.hasPassword);
     return;
   }
 
   const unlockKey = `zada_unlocked_${school.id}`;
+  document.title = `${school.school} — ZADA Yearbook`;
   const isProtected = Boolean(school.hasPassword);
   // Session-only convenience so the visitor isn't asked again on this
   // device during this browser tab session. It does NOT grant access on
