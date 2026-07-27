@@ -256,11 +256,11 @@ function openSchoolModal(school) {
     document.getElementById("s-password").placeholder = "";
     setCoverPreview("", "?");
   }
-  openOverlay(schoolOverlay);
+  schoolOverlay.classList.add("open");
 }
 
 function closeSchoolModal() {
-  closeOverlay(schoolOverlay);
+  schoolOverlay.classList.remove("open");
 }
 
 document.getElementById("btn-add-school").addEventListener("click", () => openSchoolModal(null));
@@ -327,11 +327,11 @@ async function openEditionsModal(schoolId) {
   const school = await ZadaData.getSchoolById(schoolId);
   editionsModalTitle.textContent = `Edisi Buku Tahunan — ${school.school}`;
   await renderEditionsTable();
-  openOverlay(editionsOverlay);
+  editionsOverlay.classList.add("open");
 }
 
 function closeEditionsModal() {
-  closeOverlay(editionsOverlay);
+  editionsOverlay.classList.remove("open");
   activeSchoolId = null;
   renderSchoolTable();
 }
@@ -407,11 +407,11 @@ function openEditionForm(edition) {
     editionFormTitle.textContent = "Tambah Edisi";
     document.getElementById("e-id").value = "";
   }
-  openOverlay(editionFormOverlay);
+  editionFormOverlay.classList.add("open");
 }
 
 function closeEditionForm() {
-  closeOverlay(editionFormOverlay);
+  editionFormOverlay.classList.remove("open");
 }
 
 document.getElementById("btn-add-edition").addEventListener("click", () => openEditionForm(null));
@@ -477,11 +477,11 @@ async function openProgressModal(schoolId, school) {
   document.getElementById("p-updated").textContent = progress.updatedAt
     ? `Terakhir diperbarui: ${new Date(progress.updatedAt).toLocaleString("id-ID")}`
     : "Belum pernah diperbarui.";
-  openOverlay(progressOverlay);
+  progressOverlay.classList.add("open");
 }
 
 function closeProgressModal() {
-  closeOverlay(progressOverlay);
+  progressOverlay.classList.remove("open");
   activeProgressSchoolId = null;
 }
 
