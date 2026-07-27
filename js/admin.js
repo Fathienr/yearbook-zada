@@ -17,13 +17,6 @@ function showToast(message) {
   toast.classList.add("show");
   setTimeout(() => toast.classList.remove("show"), 2200);
 }
-const toast = document.getElementById("toast");
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 2200);
-}
-
 /* Shared modal helpers: keep the page pinned to the top and lock body
    scroll while any overlay is open, so the modal is centered in view the
    moment it appears instead of requiring a scroll to find it. */
