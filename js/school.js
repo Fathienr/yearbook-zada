@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <span class="eyebrow">404</span>
           <h1 style="font-family:var(--display);font-size:2rem;margin:0.6rem 0 1rem;">Sekolah tidak ditemukan</h1>
           <p style="color:var(--text-muted);margin-bottom:1.6rem;">Tautan ini mungkin sudah tidak berlaku, atau data sekolah telah dihapus dari arsip.</p>
-          <a href="index.html" class="btn btn-primary">Kembali ke Portofolio</a>
+          <a href="index.html" class="btn btn-primary">Kembali ke Katalog</a>
         </div>
       </section>
     `;
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <span class="lock-icon">&#128274;</span>
             <span class="eyebrow">Portofolio Privat</span>
             <h1>${school.school}</h1>
-            <p>Portofolio buku tahunan sekolah ini bersifat privat untuk menjaga kerahasiaan dokumentasi siswa. Masukkan kata sandi yang diberikan oleh pihak sekolah untuk melihat seluruh edisi.</p>
+            <p>Katalog buku tahunan sekolah ini bersifat privat untuk menjaga kerahasiaan dokumentasi siswa. Masukkan kata sandi yang diberikan oleh pihak sekolah untuk melihat seluruh edisi.</p>
             <form id="lock-form">
               <div class="field">
                 <label for="lock-password">Kata Sandi</label>
