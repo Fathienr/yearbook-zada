@@ -9,6 +9,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   grid.style.display = "grid";
 
   const schools = await ZadaData.getAllSchools();
+  function approxPlus(n, step = 5) {
+  if (n <= 0) return "0";
+  const rounded = Math.floor(n / step) * step;
+  return rounded > 0 ? `${rounded}+` : `${n}`;
+}
 
   // --- hero stats ---
 const totalEditions = schools.reduce(
@@ -17,7 +22,7 @@ const totalEditions = schools.reduce(
   );
   const years = new Set();
   schools.forEach((s) => s.editions.forEach((e) => years.add(e.year)));
-  document.getElementById("stat-total").textContent = totalEditions;
+  document.getElementById("stat-total").textContent = approxPlus(totalEditions);
   document.getElementById("stat-schools").textContent = schools.length;
   document.getElementById("stat-years").textContent = years.size;
   // --- signature shelf (one spine per school) ---
@@ -57,8 +62,7 @@ const totalEditions = schools.reduce(
       return matchQ && matchLevel && matchYear && matchCategory;
     });
 
-    resultCount.innerHTML = `Menampilkan <strong>${filtered.length}</strong> dari <strong>${schools.length}</strong> sekolah &middot; <strong>${totalEditions}</strong> total edisi buku tahunan`;
-    grid.innerHTML = filtered.map(schoolCardHTML).join("");
+resultCount.innerHTML = `Menampilkan <strong>${filtered.length}</strong> dari <strong>${schools.length}</strong> sekolah &middot; <strong>${approxPlus(totalEditions, 5)}</strong> total edisi buku tahunan`;    grid.innerHTML = filtered.map(schoolCardHTML).join("");
     empty.style.display = filtered.length ? "none" : "block";
     grid.style.display = filtered.length ? "grid" : "none";
   }
