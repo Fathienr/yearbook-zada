@@ -17,7 +17,28 @@ function showToast(message) {
   toast.classList.add("show");
   setTimeout(() => toast.classList.remove("show"), 2200);
 }
+const toast = document.getElementById("toast");
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2200);
+}
 
+/* Shared modal helpers: keep the page pinned to the top and lock body
+   scroll while any overlay is open, so the modal is centered in view the
+   moment it appears instead of requiring a scroll to find it. */
+let openOverlayCount = 0;
+function openOverlay(overlay) {
+  window.scrollTo(0, 0);
+  overlay.classList.add("open");
+  openOverlayCount++;
+  document.body.classList.add("modal-open");
+}
+function closeOverlay(overlay) {
+  overlay.classList.remove("open");
+  openOverlayCount = Math.max(0, openOverlayCount - 1);
+  if (openOverlayCount === 0) document.body.classList.remove("modal-open");
+}
 /* ============ SCHOOL TABLE ============ */
 
 const tableBody = document.getElementById("table-body");
@@ -235,11 +256,11 @@ function openSchoolModal(school) {
     document.getElementById("s-password").placeholder = "";
     setCoverPreview("", "?");
   }
-  schoolOverlay.classList.add("open");
+  openOverlay(schoolOverlay);
 }
 
 function closeSchoolModal() {
-  schoolOverlay.classList.remove("open");
+  closeOverlay(schoolOverlay);
 }
 
 document.getElementById("btn-add-school").addEventListener("click", () => openSchoolModal(null));
@@ -306,11 +327,11 @@ async function openEditionsModal(schoolId) {
   const school = await ZadaData.getSchoolById(schoolId);
   editionsModalTitle.textContent = `Edisi Buku Tahunan — ${school.school}`;
   await renderEditionsTable();
-  editionsOverlay.classList.add("open");
+  openOverlay(editionsOverlay);
 }
 
 function closeEditionsModal() {
-  editionsOverlay.classList.remove("open");
+  closeOverlay(editionsOverlay);
   activeSchoolId = null;
   renderSchoolTable();
 }
@@ -386,11 +407,11 @@ function openEditionForm(edition) {
     editionFormTitle.textContent = "Tambah Edisi";
     document.getElementById("e-id").value = "";
   }
-  editionFormOverlay.classList.add("open");
+  openOverlay(editionFormOverlay);
 }
 
 function closeEditionForm() {
-  editionFormOverlay.classList.remove("open");
+  closeOverlay(editionFormOverlay);
 }
 
 document.getElementById("btn-add-edition").addEventListener("click", () => openEditionForm(null));
@@ -456,11 +477,11 @@ async function openProgressModal(schoolId, school) {
   document.getElementById("p-updated").textContent = progress.updatedAt
     ? `Terakhir diperbarui: ${new Date(progress.updatedAt).toLocaleString("id-ID")}`
     : "Belum pernah diperbarui.";
-  progressOverlay.classList.add("open");
+  openOverlay(progressOverlay);
 }
 
 function closeProgressModal() {
-  progressOverlay.classList.remove("open");
+  closeOverlay(progressOverlay);
   activeProgressSchoolId = null;
 }
 
