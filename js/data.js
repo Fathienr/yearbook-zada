@@ -128,6 +128,7 @@ const ZadaData = {
       ...meta,
       hasPassword,
       editions: hasPassword ? [] : editions || [],
+      editionCount: (editions || []).length,
       progress: hasPassword ? null : progress || defaultProgress(),
     };
     await db.collection("schools").doc(id).set(docData);
@@ -272,15 +273,16 @@ const ZadaData = {
   },
 
   async _savePortal(schoolId, school, editions, progress) {
-    if (school.hasPassword) {
-      const meta = await db.collection("admin_meta").doc(schoolId).get();
-      if (meta.exists && meta.data().hash) {
-        await db.collection("protected").doc(`${schoolId}__${meta.data().hash}`).set({ editions, progress });
-      }
-    } else {
-      await db.collection("schools").doc(schoolId).set({ editions, progress }, { merge: true });
+  if (school.hasPassword) {
+    const meta = await db.collection("admin_meta").doc(schoolId).get();
+    if (meta.exists && meta.data().hash) {
+      await db.collection("protected").doc(`${schoolId}__${meta.data().hash}`).set({ editions, progress });
     }
-  },
+    await db.collection("schools").doc(schoolId).set({ editionCount: editions.length }, { merge: true }); // ← baru
+  } else {
+    await db.collection("schools").doc(schoolId).set({ editions, progress, editionCount: editions.length }, { merge: true }); // ← editionCount ditambah
+  }
+},
 
   palette(index) {
     return COVER_PALETTES[index % COVER_PALETTES.length];

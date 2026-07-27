@@ -11,13 +11,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const schools = await ZadaData.getAllSchools();
 
   // --- hero stats ---
-  const totalEditions = schools.reduce((sum, s) => sum + s.editions.length, 0);
-  const years = new Set();
-  schools.forEach((s) => s.editions.forEach((e) => years.add(e.year)));
-  document.getElementById("stat-total").textContent = totalEditions;
-  document.getElementById("stat-schools").textContent = schools.length;
-  document.getElementById("stat-years").textContent = years.size;
-
+ const totalEditions = schools.reduce(
+  (sum, s) => sum + (s.editionCount !== undefined ? s.editionCount : (s.editions || []).length),
+  0
+);
   // --- signature shelf (one spine per school) ---
   shelf.innerHTML = "";
   schools.slice(0, 10).forEach((s) => {
